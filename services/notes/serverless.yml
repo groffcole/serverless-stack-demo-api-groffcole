@@ -1,24 +1,36 @@
 service: notes
 
-# Create an optimized package for our functions
 package:
   individually: true
 
 plugins:
-  - serverless-bundle # Package our functions with Webpack
+  - serverless-bundle
   - serverless-offline
-  - serverless-dotenv-plugin # Load .env as environment variables
+  - serverless-dotenv-plugin
 
 provider:
   name: aws
   runtime: nodejs12.x
   stage: prod
   region: us-east-1
+  environment:
+    tableName: notes
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Scan
+        - dynamodb:Query
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+        - dynamodb:DescribeTable
+      Resource: "arn:aws:dynamodb:us-east-1:*:*"
 
 functions:
-  hello:
-    handler: handler.hello
+  create:
+    handler: create.main
     events:
       - http:
-          path: hello
-          method: get
+          path: notes
+          method: post
