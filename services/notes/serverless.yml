@@ -34,3 +34,53 @@ functions:
       - http:
           path: notes
           method: post
+  get:
+    handler: get.main
+    events:
+      - http:
+          path: notes/{id}
+          method: get
+  list:
+    handler: list.main
+    events:
+      - http:
+          path: notes
+          method: get
+  update:
+    handler: update.main
+    events:
+      - http:
+          path: notes/{id}
+          method: put
+  delete:
+    handler: delete.main
+    events:
+      - http:
+          path: notes/{id}
+          method: delete
+
+
+
+
+# Service Information
+# service: notes
+# stage: prod
+# region: us-east-1
+# stack: notes-prod
+# resources: 32
+# api keys:
+#   None
+# endpoints:
+#   POST - https://9xakcudcjf.execute-api.us-east-1.amazonaws.com/prod/notes
+#   GET - https://9xakcudcjf.execute-api.us-east-1.amazonaws.com/prod/notes/{id}
+#   GET - https://9xakcudcjf.execute-api.us-east-1.amazonaws.com/prod/notes
+#   PUT - https://9xakcudcjf.execute-api.us-east-1.amazonaws.com/prod/notes/{id}
+#   DELETE - https://9xakcudcjf.execute-api.us-east-1.amazonaws.com/prod/notes/{id}
+# functions:
+#   create: notes-prod-create
+#   get: notes-prod-get
+#   list: notes-prod-list
+#   update: notes-prod-update
+#   delete: notes-prod-delete
+# layers:
+#   None
