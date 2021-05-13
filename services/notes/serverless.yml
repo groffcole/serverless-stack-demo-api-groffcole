@@ -29,35 +29,35 @@ provider:
 
 functions:
   create:
-    handler: create.main
+    handler: api/create.main
     events:
       - http:
           path: notes
           method: post
           authorizer: aws_iam
   get:
-    handler: get.main
+    handler: api/get.main
     events:
       - http:
           path: notes/{id}
           method: get
           authorizer: aws_iam
   list:
-    handler: list.main
+    handler: api/list.main
     events:
       - http:
           path: notes
           method: get
           authorizer: aws_iam
   update:
-    handler: update.main
+    handler: api/update.main
     events:
       - http:
           path: notes/{id}
           method: put
           authorizer: aws_iam
   delete:
-    handler: delete.main
+    handler: api/delete.main
     events:
       - http:
           path: notes/{id}
