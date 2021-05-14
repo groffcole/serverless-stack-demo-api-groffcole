@@ -15,6 +15,7 @@ provider:
   region: us-east-1
   environment:
     tableName: notes
+    stripeSecretKey: ${env:STRIPE_SECRET_KEY}
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -63,10 +64,13 @@ functions:
           path: notes/{id}
           method: delete
           authorizer: aws_iam
-
-
-
-
+  billing:
+    handler: billing.main
+    events:
+      - http:
+          path: billing
+          method: post
+          authorizer: aws_iam
 # Service Information
 # service: notes
 # stage: prod
